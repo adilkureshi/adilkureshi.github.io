@@ -350,3 +350,81 @@ h3 { margin: 0 0 .5rem; line-height: 1.22; letter-spacing: -.025em; font-size: c
   }
   a { cursor: var(--magnifier), pointer; }
 }
+
+/* Opening spread */
+.hero {
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, .85fr);
+  gap: clamp(1.5rem, 5vw, 5rem);
+  min-height: auto;
+  padding: clamp(1.75rem, 5vw, 4.5rem) 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  overflow: visible;
+}
+.hero::before { display: none; }
+.hero::after { background: radial-gradient(circle 15rem at var(--pointer-x, 70%) var(--pointer-y, 40%), #84c9a51c, transparent); }
+.hero-copy, .hero-aside { padding: 0; }
+.hero-copy h1 {
+  font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+  letter-spacing: -.025em;
+}
+.hero-headline {
+  margin: .55rem 0 0;
+  font-size: clamp(4.1rem, 9vw, 8.75rem);
+  font-weight: 760;
+  line-height: .91;
+  letter-spacing: -.045em;
+  color: #fff5db;
+}
+.hero-headline em { color: #f4c969; font-style: normal; }
+.hero .intro { margin-block: 1.35rem; max-width: 35rem; }
+.hero .button { background: #f4c969; color: #211b0f; }
+.hero .button:hover { background: #ffe1a1; }
+.hero-aside { gap: 0; align-self: stretch; grid-template-rows: 1fr auto; }
+.hero-art {
+  width: 100%;
+  min-height: 20rem;
+  display: grid;
+  place-items: center;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid #535a87;
+  border-radius: 48% 48% 0 0 / 34% 34% 0 0;
+  background: radial-gradient(ellipse at 50% 53%, #52568a, #2b3055 72%);
+}
+.hero-art::before {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  z-index: -1;
+  border: 1px solid #d8c1ff48;
+  border-radius: 50%;
+  box-shadow: 0 0 0 22px #d8c1ff13, 0 0 0 46px #d8c1ff0d;
+}
+.hero-cartoon { width: min(78%, 20rem); height: auto; }
+.hero-focus {
+  width: 100%;
+  max-width: none;
+  border: 1px solid #535a87;
+  border-top: 0;
+  border-radius: 0 0 .8rem .8rem;
+  background: #222747;
+  padding: .85rem 1rem;
+}
+.hero-focus strong { color: #fff5db; }
+.hero-focus small { color: #d6d7e9; }
+.hero-focus:is(:hover, :focus-visible) { background: #353b65; border-color: #aaaee8; transform: none; }
+.trail { margin-top: 0; gap: 0; border-block: 1px solid var(--line); }
+.trail a { background: transparent; border: 0; border-radius: 0; }
+.trail a:is(:hover, :focus-visible) { transform: none; }
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; gap: 1.8rem; }
+  .hero-headline { font-size: clamp(3.9rem, 13vw, 6rem); }
+  .hero-art { min-height: 15rem; }
+  .hero-cartoon { width: min(62%, 15rem); }
+}
+@media (max-width: 560px) {
+  .trail a + a { border-left: 0; border-top: 1px solid var(--line); }
+}
