@@ -127,15 +127,30 @@ h3 { margin: 0 0 .5rem; line-height: 1.22; letter-spacing: -.025em; font-size: c
 }
 .credentials { background: #17211e; border: 1px solid var(--line); }
 .education-timeline { list-style: none; padding: 0 0 0 .45rem; margin: 1.45rem 0 0; }
-.education-timeline li { position: relative; padding: 0 0 1.6rem 1.2rem; border-left: 1px solid #668d7b; }
-.education-timeline li:last-child { padding-bottom: 0; border-color: transparent; }
+.education-timeline li {
+  --marker-center: .7rem;
+  --marker-size: .44rem;
+  position: relative;
+  padding: 0 0 1.6rem 1.2rem;
+}
+.education-timeline li:last-child { padding-bottom: 0; }
+.education-timeline li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  inset-block: var(--marker-center) calc(-1 * var(--marker-center));
+  inset-inline-start: 0;
+  width: 1px;
+  background: #668d7b;
+}
 .education-timeline li::before {
   content: '';
   position: absolute;
-  top: .48rem;
-  left: -.25rem;
-  width: .44rem;
+  z-index: 1;
+  inset-block-start: var(--marker-center);
+  inset-inline-start: 0;
+  width: var(--marker-size);
   aspect-ratio: 1;
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   background: var(--accent);
 }
@@ -205,17 +220,6 @@ h3 { margin: 0 0 .5rem; line-height: 1.22; letter-spacing: -.025em; font-size: c
   max-width: 100%;
   position: relative;
 }
-.hero-copy h1::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 -.13em;
-  height: .035em;
-  min-height: 2px;
-  border-radius: 99px;
-  background: linear-gradient(90deg, var(--accent), #e7ffd0);
-  opacity: 0;
-}
-.hero-copy h1:hover::after { opacity: 1; }
 .name-first { display: inline-block; }
 .hero-copy h1 em {
   display: inline-block;
@@ -262,12 +266,6 @@ h3 { margin: 0 0 .5rem; line-height: 1.22; letter-spacing: -.025em; font-size: c
   .hero-copy h1 :is(.name-first, em) {
     transition: transform 320ms var(--motion-ease), background-position 700ms var(--motion-ease);
   }
-  .hero-copy h1::after {
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 380ms var(--motion-ease), opacity var(--motion-fast) ease;
-  }
-  .hero-copy h1:hover::after { transform: scaleX(1); }
   .hero-copy h1:hover .name-first { transform: translateY(-.045em); }
   .hero-copy h1:hover em {
     transform: translateY(-.09em);
@@ -277,7 +275,7 @@ h3 { margin: 0 0 .5rem; line-height: 1.22; letter-spacing: -.025em; font-size: c
     transition: transform 350ms var(--motion-ease), filter 350ms ease;
   }
   .hero-aside:is(:hover, :focus-within) .hero-cartoon {
-    transform: translateY(-10px) rotate(-5deg) scale(1.055);
+    transform: translateY(-5px) rotate(-3deg) scale(1.025);
     filter: drop-shadow(0 14px 16px #8fdfb94f);
   }
   .story-heading:hover .money-doodle { transform: translateY(-6px) rotate(3deg); }
@@ -366,15 +364,16 @@ h3 { margin: 0 0 .5rem; line-height: 1.22; letter-spacing: -.025em; font-size: c
 .hero::after { background: radial-gradient(circle 15rem at var(--pointer-x, 70%) var(--pointer-y, 40%), #84c9a51c, transparent); }
 .hero-copy, .hero-aside { padding: 0; }
 .hero-copy h1 {
-  font-size: clamp(1.3rem, 2.2vw, 1.9rem);
-  letter-spacing: -.025em;
+  font-size: clamp(2.35rem, 5.7vw, 5.5rem);
+  letter-spacing: -.05em;
 }
+.hero-role { margin: .35rem 0 .85rem; color: var(--muted); font-size: 1rem; }
 .hero-headline {
   margin: .55rem 0 0;
-  font-size: clamp(4.1rem, 9vw, 8.75rem);
+  font-size: clamp(1.65rem, 3.4vw, 3.25rem);
   font-weight: 760;
-  line-height: .91;
-  letter-spacing: -.045em;
+  line-height: 1.08;
+  letter-spacing: -.04em;
   color: #fff5db;
 }
 .hero-headline em { color: #f4c969; font-style: normal; }
@@ -385,6 +384,7 @@ h3 { margin: 0 0 .5rem; line-height: 1.22; letter-spacing: -.025em; font-size: c
 .hero-art {
   width: 100%;
   min-height: 20rem;
+  padding: clamp(2rem, 4vw, 3rem) 1.25rem 1.75rem;
   display: grid;
   place-items: center;
   position: relative;
@@ -403,7 +403,7 @@ h3 { margin: 0 0 .5rem; line-height: 1.22; letter-spacing: -.025em; font-size: c
   border-radius: 50%;
   box-shadow: 0 0 0 22px #d8c1ff13, 0 0 0 46px #d8c1ff0d;
 }
-.hero-cartoon { width: min(78%, 20rem); height: auto; }
+.hero-cartoon { width: min(78%, 18rem); height: auto; }
 .hero-focus {
   width: 100%;
   max-width: none;
@@ -421,7 +421,7 @@ h3 { margin: 0 0 .5rem; line-height: 1.22; letter-spacing: -.025em; font-size: c
 .trail a:is(:hover, :focus-visible) { transform: none; }
 @media (max-width: 760px) {
   .hero { grid-template-columns: 1fr; gap: 1.8rem; }
-  .hero-headline { font-size: clamp(3.9rem, 13vw, 6rem); }
+  .hero-copy h1 { font-size: clamp(2.3rem, 8.8vw, 4rem); }
   .hero-art { min-height: 15rem; }
   .hero-cartoon { width: min(62%, 15rem); }
 }
